@@ -14,14 +14,23 @@
 <body>
     <header class="header">
         <h1 class="header__title">Student Enrollment System</h1>
+        <button class="toggle__button" id="student-btn">Student Managment</button>
+        <button class="toggle__button" id="instructor-btn">Instructor Managment</button>
+        <button class="toggle__button" id="course-btn">Course Management</button>
+        <button class="toggle__button" id="enrollment-btn">Enrollment</button>
+        <button class="toggle__button" id="assign-btn">Assign Instructors to Courses</button>   
     </header>
 
     <main class="main">
+        <div class="textbox__introduction">
+            <h3>Introductin of some sort here?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quibusdam molestiae, officia error hic soluta totam cum, delectus blanditiis distinctio consequuntur voluptas? Mollitia hic aut quas asperiores qui commodi, ut exercitationem impedit, quae vel error deserunt tenetur eaque eum et ullam, amet quasi suscipit ad! Fugiat doloribus iusto velit, consequuntur mollitia praesentium tenetur delectus quas enim. Numquam enim officiis iste dolores id fuga unde quisquam? Dignissimos id molestias laborum, explicabo assumenda a dolor iusto architecto sint at aut quia voluptatem, neque deserunt necessitatibus inventore! Eaque velit eveniet porro debitis veritatis.</p>
+        </div>
       <!-- Feilmeldinger -->
       <div class="error-messages"></div>
 
       <!-- Student Management -->
-      <section class="section section--student">
+      <section class="hidden section--student" id="student">
           <h2 class="section__title">Student Management</h2>
           <form class="form form--student">
               <label for="student-name">Name:</label>
@@ -53,7 +62,7 @@
       </section>
 
       <!-- Instructor Management -->
-      <section class="section section--instructor">
+      <section class="hidden section--instructor" id="instructor">
           <h2 class="section__title">Instructor Management</h2>
           <form class="form form--instructor">
               <label for="instructor-name">Name:</label>
@@ -85,7 +94,7 @@
       </section>
 
       <!-- Course Management -->
-      <section class="section section--course">
+      <section class="hidden section--course" id="course">
           <h2 class="section__title">Course Management</h2>
           <form class="form form--course">
               <label for="course-name">Course Name:</label>
@@ -114,7 +123,7 @@
       </section>
 
       <!-- Student Enrollment -->
-      <section class="section section--enrollment">
+      <section class="hidden section--enrollment" id="enrollment">
           <h2 class="section__title">Enroll Students in Courses</h2>
           <form class="form form--enrollment">
               <label for="enroll-student">Select Student:</label>
@@ -128,7 +137,7 @@
       </section>
 
       <!-- Instructor Course Assignment -->
-      <section class="section section--assign">
+      <section class="hidden section--assign" id="assign">
           <h2 class="section__title">Assign Instructors to Courses</h2>
           <form class="form form--assign">
               <label for="assign-instructor">Select Instructor:</label>
@@ -147,6 +156,7 @@
   </footer>
 
   <script type="module" src="/src/js/app.js"></script>
+  
 </body>
 
 </html>
