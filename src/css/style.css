@@ -1,28 +1,35 @@
 body{
    height: auto;
    width: auto;
-   padding: 5%;
+   padding: 3%;
 }
 
 .header{
     display: flex;
-    height: 5%;
+    height: auto;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    background-color:rgb(79, 71, 71);
+    color: var(--text-color-light);
+    padding:2%;
 }
+
 /*Hader buttons*/ 
 .menu__buttons{
     display: flex;
     justify-content: space-between;
     align-content: center;
     width: 95%;
+    margin-top:2%;
 }
 
 .toggle__button{
     width:19%;
     padding: 1%;
     border-radius: 10px;
+    background-color: var(--color-primary);
+    color: var(--text-color-light);
 }
 
 .hidden{
