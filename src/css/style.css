@@ -2,6 +2,7 @@ body{
    height: auto;
    width: auto;
    padding: 3%;
+   background-color: var(--color-background-light);
 }
 
 .header{
@@ -10,16 +11,20 @@ body{
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    background-color:rgb(79, 71, 71);
+    background-color: var(--color-hover);
+    /* background-color:rgb(79, 71, 71); */
     color: var(--text-color-light);
     padding:2%;
+    border-radius: var(--border-radius-medium);
 }
 
-/*Hader buttons*/ 
+
+/*Header buttons*/ 
 .menu__buttons{
     display: flex;
     justify-content: space-between;
     align-content: center;
+    gap: var(--spacing-medium);
     width: 95%;
     margin-top:2%;
 }
@@ -31,7 +36,100 @@ body{
     background-color: var(--color-primary);
     color: var(--text-color-light);
 }
+.toggle__button:hover{
+    cursor: pointer;
+}
+
+
+/*--------- MAIN ----------*/ 
+.main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--color-background-light);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .hidden{
-    display: none;
+    /* display: none; */
+}
+
+.section__title {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+label {
+    font-weight: bold;
+}
+
+.form__input, .form__select {
+    padding: 10px;
+    border: 1px solid var(--color-background-light);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form__button {
+    background-color: var(--color-primary);
+    color: var(--text-color-light);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form__button:hover {
+    background-color: var(--color-hover);
+}
+
+/* TABLE */ 
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    border: 1px solid var(--color-background-light);
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: var(--color-secondary);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Footer */ 
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #004080;
+    color: white;
+    margin-top: 20px;
+}
+
+.footer__text {
+    margin: 0;
+    font-size: 14px;
 }
