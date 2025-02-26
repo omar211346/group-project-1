@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".toggle__button"); 
 
     function hideAllSections(){
-        sections.forEach(section => section.classList.toggle("hidden"));
+        sections.forEach(section => section.classList.add("hidden"));
     }
 
     buttons.forEach(button => {
