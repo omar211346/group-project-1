@@ -22,11 +22,11 @@ export class CourseManager {
         const updatedCourses = courses.filter(course.id !== courseId);
 
         if (courses.length === updatedCourses.length) {
-            return null; 
+            return null; // Ingen kurs hittades att ta bort
         }
 
         this.saveCourses(updatedCourses);
-        return true;
+        return true; // Kurs borttagen
     }
 
     static updateCourse(courseId, updatedData) {
@@ -36,7 +36,7 @@ export class CourseManager {
         if (courseIndex !== -1) {
             courses[courseIndex] = { ...courses[courseIndex], ...updatedData };
             this.saveCourses(courses);
-            return courses[courseIndex]; 
+            return courses[courseIndex]; // Returnera den uppdaterade kursen
         }
 
         return null;
