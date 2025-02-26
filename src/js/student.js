@@ -8,3 +8,12 @@ export class Student {
         this.courses = []; 
     }
 }
+
+export class Instructor {
+    constructor(name, email, id) {
+        this.id = uuidv4();
+        this.name = name;
+        this.email = email;
+        this.courses = [];
+    }
+}   
