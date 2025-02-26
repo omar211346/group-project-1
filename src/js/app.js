@@ -9,6 +9,7 @@ const coursebtn = document.querySelector ("#course-btn");
 const enrollmentbtn = document.querySelector ("#enrollment-btn");
 const assignbtn = document.querySelector ("#assign-btn");
 
+
 function hideAllsections () {
     studentSection.classList.add('hidden');
     assignSection.classList.add('hidden');
