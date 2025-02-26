@@ -15,24 +15,25 @@
     <header class="header">
         <h1 class="header__title">Student Enrollment System</h1> 
         <div class="menu__buttons">
-            <button class="toggle__button" id="student-btn">Student Managment</button>
-            <button class="toggle__button" id="instructor-btn">Instructor Managment</button>
-            <button class="toggle__button" id="course-btn">Course Management</button>
-            <button class="toggle__button" id="enrollment-btn">Enrollment</button>
-            <button class="toggle__button" id="assign-btn">Assign Instructors to Courses</button>   
+            <button class="toggle__button" data-section="student">Student Managment</button>
+            <button class="toggle__button" data-section="instructor">Instructor Managment</button>
+            <button class="toggle__button" data-section="course">Course Management</button>
+            <button class="toggle__button" data-section="enrollment">Enrollment</button>
+            <button class="toggle__button" data-section="assign">Assign Instructors to Courses</button>   
+            <button class="toggle__button" data-section="course-overview">Course Overview</button>
         </div>
     </header>
 
     <main class="main">
         <div class="textbox__introduction">
             <h3>Introductin of some sort here?</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quibusdam molestiae, officia error hic soluta totam cum, delectus blanditiis distinctio consequuntur voluptas? Mollitia hic aut quas asperiores qui commodi, ut exercitationem impedit, quae vel error deserunt tenetur eaque eum et ullam, amet quasi suscipit ad! Fugiat doloribus iusto velit, consequuntur mollitia praesentium tenetur delectus quas enim. Numquam enim officiis iste dolores id fuga unde quisquam? Dignissimos id molestias laborum, explicabo assumenda a dolor iusto architecto sint at aut quia voluptatem, neque deserunt necessitatibus inventore! Eaque velit eveniet porro debitis veritatis.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, beatae?</p>
         </div>
       <!-- Feilmeldinger -->
       <div class="error-messages"></div>
 
       <!-- Student Management -->
-      <section class="hidden section--student" id="student">
+      <section class="hidden section" id="student">
           <h2 class="section__title">Student Management</h2>
           <form class="form form--student">
               <label for="student-name">Name:</label>
@@ -64,7 +65,7 @@
       </section>
 
       <!-- Instructor Management -->
-      <section class="hidden section--instructor" id="instructor">
+      <section class="hidden section" id="instructor">
           <h2 class="section__title">Instructor Management</h2>
           <form class="form form--instructor">
               <label for="instructor-name">Name:</label>
@@ -96,7 +97,7 @@
       </section>
 
       <!-- Course Management -->
-      <section class="hidden section--course" id="course">
+      <section class="hidden section" id="course">
           <h2 class="section__title">Course Management</h2>
           <form class="form form--course">
               <label for="course-name">Course Name:</label>
@@ -125,7 +126,7 @@
       </section>
 
       <!-- Student Enrollment -->
-      <section class="hidden section--enrollment" id="enrollment">
+      <section class="hidden section" id="enrollment">
           <h2 class="section__title">Enroll Students in Courses</h2>
           <form class="form form--enrollment">
               <label for="enroll-student">Select Student:</label>
@@ -139,7 +140,7 @@
       </section>
 
       <!-- Instructor Course Assignment -->
-      <section class="hidden section--assign" id="assign">
+      <section class="hidden section" id="assign">
           <h2 class="section__title">Assign Instructors to Courses</h2>
           <form class="form form--assign">
               <label for="assign-instructor">Select Instructor:</label>
@@ -150,6 +151,25 @@
 
               <button type="submit" class="form__button form__button--assign">Assign</button>
           </form>
+      </section>
+      <!--- Course Overview -->
+      <section class="hidden section" id="course-overview">
+        <h2 class="section__title">Course Overview</h2>
+        <div class="table-container">
+          <table class="table table--course-overview">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Instructor</th>
+                <th>Enrolled Students</th>
+              </tr>
+            </thead>
+            <tbody class="table__body table__body--course-overview">
+              <!-- Dynamiskt innehåll kan läggas in här -->
+            </tbody>
+          </table>
+        </div>
       </section>
   </main>
 
