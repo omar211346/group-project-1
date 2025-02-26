@@ -57,7 +57,7 @@ section {
 }
 
 .hidden{
-    /* display: none; */
+    display: none;
 }
 
 .section__title {
