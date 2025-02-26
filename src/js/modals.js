@@ -17,3 +17,11 @@ export class Instructor {
         this.courses = [];
     }
 }   
+
+
+export class Course {
+    constructor(name, code) {
+        this.name = name;
+        this.code = code;
+    }
+}
