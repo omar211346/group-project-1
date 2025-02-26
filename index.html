@@ -15,12 +15,12 @@
     <header class="header">
         <h1 class="header__title">Student Enrollment System</h1> 
         <div class="menu__buttons">
-            <button class="toggle__button" data-section="student">Student Managment</button>
-            <button class="toggle__button" data-section="instructor">Instructor Managment</button>
-            <button class="toggle__button" data-section="course">Course Management</button>
-            <button class="toggle__button" data-section="enrollment">Enrollment</button>
-            <button class="toggle__button" data-section="assign">Assign Instructors to Courses</button>   
-            <button class="toggle__button" data-section="course-overview">Course Overview</button>
+            <button class="toggle__button" id="student-btn">Student Managment</button>
+            <button class="toggle__button" id="instructor-btn">Instructor Managment</button>
+            <button class="toggle__button" id="course-btn">Course Management</button>
+            <button class="toggle__button" id="enrollment-btn">Enrollment</button>
+            <button class="toggle__button" id="assign-btn">Assign Instructors to Courses</button>   
+            <button class="toggle__button" id="course-overview-btn">Course Overview</button>
         </div>
     </header>
 
@@ -33,29 +33,29 @@
       <div class="error-messages"></div>
 
       <!-- Student Management -->
-      <section class="hidden section" id="student">
+      <section class="hidden section--student" id="student">
           <h2 class="section__title">Student Management</h2>
           <form class="form form--student">
-              <label for="student-name">Name:</label>
-              <input type="text" class="form__input form__input--name" id="student-name" placeholder="Name" required>
-
-              <label for="student-email">Email:</label>
-              <input type="email" class="form__input form__input--email" id="student-email" placeholder="Email" required>
-
-              <label for="student-id">Student ID:</label>
-              <input type="text" class="form__input form__input--id" id="student-id" placeholder="Student ID" required>
-
-              <button type="submit" class="form__button form__button--add">Add Student</button>
-          </form>
+            <label for="student-first-name">First Name:</label>
+            <input type="text" class="form__input" id="student-first-name" placeholder="First Name" required>
+    
+            <label for="student-last-name">Last Name:</label>
+            <input type="text" class="form__input" id="student-last-name" placeholder="Last Name" required>
+    
+            <label for="student-email">Email:</label>
+            <input type="email" class="form__input form__input--email" id="student-email" placeholder="Email" required>
+    
+            <button type="submit" class="form__button form__button--add">Add Student</button>
+        </form>
 
           <div class="table-container">
               <table class="table table--student">
                   <thead>
                       <tr>
-                          <th>Name</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
                           <th>Email</th>
                           <th>Student ID</th>
-                          <th>Courses (Max 3)</th>
                           <th>Actions</th>
                       </tr>
                   </thead>
@@ -65,7 +65,7 @@
       </section>
 
       <!-- Instructor Management -->
-      <section class="hidden section" id="instructor">
+      <section class="hidden section--instructor" id="instructor">
           <h2 class="section__title">Instructor Management</h2>
           <form class="form form--instructor">
             <label for="instructor-first-name">First Name:</label>
@@ -97,7 +97,7 @@
       </section>
 
       <!-- Course Management -->
-      <section class="hidden section" id="course">
+      <section class="hidden section--course" id="course">
           <h2 class="section__title">Course Management</h2>
           <form class="form form--course">
             <label for="course-name">Course Name:</label>
@@ -124,7 +124,7 @@
       </section>
 
       <!-- Student Enrollment -->
-      <section class="hidden section" id="enrollment">
+      <section class="hidden section--student" id="enrollment">
           <h2 class="section__title">Enroll Students in Courses</h2>
           <form class="form form--enrollment">
               <label for="enroll-student">Select Student:</label>
@@ -138,7 +138,7 @@
       </section>
 
       <!-- Instructor Course Assignment -->
-      <section class="hidden section" id="assign">
+      <section class="hidden section--assign" id="assign">
           <h2 class="section__title">Assign Instructors to Courses</h2>
           <form class="form form--assign">
               <label for="assign-instructor">Select Instructor:</label>
@@ -149,9 +149,22 @@
 
               <button type="submit" class="form__button form__button--assign">Assign</button>
           </form>
+          <table class="table table--instructor-courses">
+            <thead>
+                <tr>
+                    <th>Instructor</th>
+                    <th>Email</th>
+                    <th>Courses</th>
+                </tr>
+            </thead>
+            <tbody class="table__body table__body--instructor-courses">
+                <!-- Dynamiskt innehåll fylls av JavaScript -->
+            </tbody>
+        </table>
       </section>
+
       <!--- Course Overview -->
-      <section class="hidden section" id="course-overview">
+      <section class="hidden section--course-overview" id="course-overview">
         <h2 class="section__title">Course Overview</h2>
         <div class="table-container">
           <table class="table table--course-overview">
