@@ -1,32 +1,29 @@
-
-
 export class CourseManager {
-    static getCourses(){
+    static getCourses() {
         return JSON.parse(localStorage.getItem("courses")) || [];
     }
 
-    static saveCourses(courses){
+    static saveCourses(courses) {
         localStorage.setItem("courses", JSON.stringify(courses));
     }
 
-    static addCourse(course){
+    static addCourse(course) {
         const courses = this.getCourses(); 
         courses.push(course);
         this.saveCourses(courses);
         return course;
-
     }
 
-    static deleteCourse(courseId){
-        let courses = this.getCourses(); 
-        const updatedCourses = courses.filter(course.id !== courseId);
-
+    static deleteCourse(courseId) {
+        let courses = this.getCourses();
+        const updatedCourses = courses.filter(course => course.id !== courseId);
+    
         if (courses.length === updatedCourses.length) {
-            return null; // Ingen kurs hittades att ta bort
+            return false; 
         }
-
-        this.saveCourses(updatedCourses);
-        return true; // Kurs borttagen
+    
+        this.saveCourses(updatedCourses);  
+        return true; 
     }
 
     static updateCourse(courseId, updatedData) {
@@ -36,14 +33,9 @@ export class CourseManager {
         if (courseIndex !== -1) {
             courses[courseIndex] = { ...courses[courseIndex], ...updatedData };
             this.saveCourses(courses);
-            return courses[courseIndex]; // Returnera den uppdaterade kursen
+            return courses[courseIndex];
         }
 
         return null;
     }
-
-    static getAllCourses() {
-        return this.getCourses();
-    }
 }
-
