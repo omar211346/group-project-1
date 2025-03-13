@@ -7,7 +7,7 @@ const courseSelect = document.querySelector("#enroll-course");
 const enrollForm = document.querySelector(".form--enrollment");
 
 //  Fyll dropdown med studenter ved å bruke UI.js
-function populateStudentDropdown() {
+export function populateStudentDropdown() {
     studentSelect.innerHTML = "";
 
     const students = StudentManager.getStudents();
@@ -20,7 +20,7 @@ function populateStudentDropdown() {
 }
 
 //  Fyll dropdown med kurs ved å bruke UI.js
-function populateCourseDropdown() {
+export function populateCourseDropdown() {
     courseSelect.innerHTML = "";
 
     const courses = CourseManager.getCourses();
@@ -33,7 +33,7 @@ function populateCourseDropdown() {
 }
 
 //  Håndter påmelding av studenter til kurs
-function handleEnrollment(event) {
+export function handleEnrollment(event) {
     event.preventDefault();
 
     const studentId = studentSelect.value;
@@ -42,8 +42,8 @@ function handleEnrollment(event) {
     const result = StudentManager.enrollStudentInCourse(studentId, courseId);
 
     if (result === true) {
-        UI.updateStudentCourseTable(); // Oppdater tabellen visuelt
-        updateStudentCoursesUI(); // Oppdater listen over studentens kurs
+        UI.updateStudentCourseTable();
+        updateStudentCoursesUI();
         alert("Student ble meldt opp i kurset!");
     } else {
         alert(result);
@@ -51,13 +51,13 @@ function handleEnrollment(event) {
 }
 
 // Oppdater visning av hvilke kurs studenten er påmeldt i
-function updateStudentCoursesUI() {
+export function updateStudentCoursesUI() {
     const studentId = studentSelect.value;
     const students = StudentManager.getStudents();
     const student = students.find(s => s.id === studentId);
 
     const coursesList = document.querySelector(".student-courses-list");
-    coursesList.innerHTML = ""; // Tøm listen før oppdatering
+    coursesList.innerHTML = "";
 
     if (!student || student.courses.length === 0) {
         coursesList.innerHTML = "<p>Ingen kurs registrert</p>";
@@ -74,11 +74,13 @@ function updateStudentCoursesUI() {
     });
 }
 
-
+// Event Listeners
 enrollForm.addEventListener("submit", handleEnrollment);
 studentSelect.addEventListener("change", updateStudentCoursesUI);
 
-t
-populateStudentDropdown();
-populateCourseDropdown();
-updateStudentCoursesUI();
+// Kjør funksjonene ved DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+    populateStudentDropdown();
+    populateCourseDropdown();
+    updateStudentCoursesUI();
+});
