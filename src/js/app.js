@@ -4,13 +4,13 @@ import { CourseManager } from "./courseManager.js";
 import { UI } from "./ui.js";
 import { Student, Instructor, Course } from "./models.js";
 
-// import { populateStudentDropdown, populateCourseDropdown, handleEnrollment, updateStudentCoursesUI } from "./enrollment.js";
+import { populateStudentDropdown, populateCourseDropdown, handleEnrollment, updateStudentCoursesUI } from "./enrollment.js";
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     populateStudentDropdown();
-//     populateCourseDropdown();
-//     updateStudentCoursesUI();
-// });
+document.addEventListener("DOMContentLoaded", () => {
+    populateStudentDropdown();
+    populateCourseDropdown();
+    updateStudentCoursesUI();
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
