@@ -51,6 +51,7 @@ export class UI {
 
     /*** INSTRUCTOR UI ***/
     static displayInstructors() {
+
         const instructors = InstructorManager.getInstructors();
         const instructorTableBody = document.querySelector(".table__body--instructor");
 
