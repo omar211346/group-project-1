@@ -191,8 +191,11 @@ assignBtn.addEventListener("click", () => {
 courseOverviewBtn.addEventListener("click", () => {
     hideAllSections();
     courseOverviewSection.classList.remove("hidden");
+    UI.displayCourseOverview(); // Oppdater oversikten når seksjonen åpnes
 
 });
+
+
 // import { StudentManager } from "./studentManager.js";
 // import { InstructorManager } from "./instructorManager.js";
 // import { CourseManager } from "./courseManager.js";

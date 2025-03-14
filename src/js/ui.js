@@ -23,15 +23,27 @@ export class UI {
             <td>${student.email}</td>
             <td>${student.id}</td>
             <td>
-                <button class="delete-student" data-id="${student.id}">Delete</button>
-                <button class="edit-student" data-id="${student.id}">Edit</button>
+                 <button class="delete-student" data-id="${student.id}">Delete</button>
+                 <button class="edit-student" data-id="${student.id}">Edit</button>
             </td>
         `;
 
+        // DELETE BUTTON
         studentTable.appendChild(row);
+        document.querySelector(".table__body--student").addEventListener("click", (event) => {
+            if (event.target.classList.contains("delete-student")) {
+                const studentId = event.target.getAttribute("data-id");
+        
+                if (confirm("Er du sikker på at du vil slette denne studenten?")) {
+                    StudentManager.deleteStudent(studentId);
+                    UI.displayStudents(); 
+                }
+            }
+        });
+        
     }
-
-    // DELETE BUTTON
+    
+    
 
     // EDIT BUTTON 
 
@@ -236,7 +248,40 @@ export class UI {
     }
 
 
+    /*** COURSE OVERVIEW UI ***/
+    static displayCourseOverview() {
+        const courses = CourseManager.getCourses();
+        const instructors = InstructorManager.getInstructors();
+        const students = StudentManager.getStudents();
+        const courseOverviewTable = document.querySelector(".table__body--course-overview");
+    
+        if (!courseOverviewTable) return;
+    
+        courseOverviewTable.innerHTML = ""; // Rens tabellen før oppdatering
+    
+        courses.forEach(course => {
+            const instructor = instructors.find(inst => inst.courses && inst.courses.includes(course.id)) || { firstName: "-", lastName: "-" };
+            const enrolledStudents = students.filter(student => student.courses && student.courses.includes(course.id))
+                                             .map(student => `${student.firstName} ${student.lastName}`)
+                                             .join(", ") || "-";
+    
+            const row = document.createElement("tr");
+    
+            row.innerHTML = `
+                <td>${course.name}</td>
+                <td>${course.code}</td>
+                <td>${instructor.firstName} ${instructor.lastName}</td>
+                <td>${enrolledStudents}</td>
+            `;
+    
+            courseOverviewTable.appendChild(row);
+        });
+    }
 }
+
+
+    
+
 //  MOHAMMED OCH LINNEA: 
 /* import { StudentManager } from "./studentManager.js";
 import { InstructorManage } from "./instructorManage.js";
