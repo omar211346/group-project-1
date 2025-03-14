@@ -19,6 +19,17 @@ export class StudentManager {
         this.saveStudents(students);
     }
 
+    static removeStudentFromCourse(studentId, courseId) {
+        const students = this.getStudents();
+        const student = students.find(s => s.id === studentId);
+    
+        if (!student || !student.courses) return "Student not found or no courses registered.";
+        
+        student.courses = student.courses.filter(id => id !== courseId);
+        
+        this.saveStudents(students);
+        return true;
+    }
     static updateStudent(id, newName, newEmail) {
         let students = this.getStudents();
         students.forEach(student => {
@@ -28,5 +39,34 @@ export class StudentManager {
             }
         });
         this.saveStudents(students);
+        
     }
+    
+
+
+    static enrollStudentInCourse(studentId, courseId) {
+        const students = this.getStudents();
+        const student = students.find(s => s.id === studentId);
+    
+        if (!student) return "Student not found.";
+    
+        if (!student.courses) {
+            student.courses = []; // Sørg for at 'courses' feltet eksisterer
+        }
+    
+        if (student.courses.includes(courseId)) {
+            return "Student is already enrolled in this course.";
+        }
+    
+        if (student.courses.length >= 3) {
+            return "Student can only enroll in a maximum of 3 courses.";
+        }
+    
+        student.courses.push(courseId);
+        this.saveStudents(students);
+    
+        return true; // Påmelding vellykket
+    }
+    
 }
+

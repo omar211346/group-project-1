@@ -116,6 +116,58 @@ export class UI {
     
         row.remove();  
     }
+            // viser kurs studentene har meldt seg opp til 
+    static displayStudentCourses() {
+        const students = StudentManager.getStudents();
+        const courses = CourseManager.getCourses();
+        const studentCourseTable = document.querySelector(".table__body--student-courses");
+        
+
+    
+        studentCourseTable.innerHTML = ""; // Rens tabellen før oppdatering
+    
+        students.forEach(student => {
+            if (!student.courses || student.courses.length === 0) {
+                return; // Hopp over studenter uten kurs
+            }
+    
+            const enrolledCourses = student.courses.map(courseId => {
+                const course = courses.find(c => c.id === courseId);
+                return course ? `${course.name} (${course.code})` : "Unknown Course";
+            }).join(", ");
+    
+            const row = document.createElement("tr");
+    
+            row.innerHTML = `
+                <td>${student.firstName} ${student.lastName}</td>
+                <td>${enrolledCourses}</td>
+                <td>
+                    <button class="delete-enrollment" data-id="${student.id}">Remove</button>
+                </td>
+            `;
+    
+            studentCourseTable.appendChild(row);
+            
+
+        });
+        document.addEventListener("click", (event) => {
+            if (event.target.classList.contains("delete-enrollment")) {
+                const studentId = event.target.getAttribute("data-id");
+                const courseId = prompt("Skriv inn kurskoden for å fjerne studenten fra kurset:");
+        
+                if (courseId) {
+                    const result = StudentManager.removeStudentFromCourse(studentId, courseId);
+                    if (result === true) {
+                        UI.displayStudentCourses(); // Oppdater visning etter sletting
+                        alert("Kurs fjernet fra studentens liste.");
+                    } else {
+                        alert("Kunne ikke finne studenten eller kurset.");
+                    }
+                }
+            }
+        });
+    }
+    
   
     // EDIT BUTTON FIX!!! 
 
