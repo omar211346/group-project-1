@@ -15,9 +15,16 @@ export class StudentManager {
 
     static deleteStudent(id) {
         let students = this.getStudents();
-        students = students.filter(student => student.id !== id);
-        this.saveStudents(students);
+        const updatedStudents = students.filter(student => student.id !== id);
+        
+        if (students.length === updatedStudents.length) {
+            return false;
+        }
+        
+        this.saveStudents(updatedStudents);
+        return true;
     }
+
 
     static removeStudentFromCourse(studentId, courseId) {
         const students = this.getStudents();
@@ -31,15 +38,26 @@ export class StudentManager {
         return true;
     }
     static updateStudent(id, newName, newEmail) {
+
+    static updateStudent(id, firstName, lastName, email) {
+
         let students = this.getStudents();
-        students.forEach(student => {
-            if (student.id === id) {
-                student.name = newName;
-                student.email = newEmail;
-            }
-        });
-        this.saveStudents(students);
+        const student = students.find(student => student.id === id);
         
+        if (!student) {
+            return false;
+        }
+        
+        student.firstName = firstName;
+        student.lastName = lastName;
+        student.email = email;
+        
+        this.saveStudents(students);
+
+        
+
+        return true;
+
     }
     
 

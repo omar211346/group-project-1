@@ -2,8 +2,42 @@ import { StudentManager } from "./studentManager.js";
 import { InstructorManager } from "./instructorManager.js";
 import { CourseManager } from "./courseManager.js";
 
-
 export class UI {
+    static editState = {
+        isEditing: false,
+        currentId: null
+    };
+
+    static enterEditMode(id) {
+        const student = StudentManager.getStudents().find(s => s.id === id);
+        const instructor = InstructorManager.getInstructors().find(i => i.id === id);
+        const course = CourseManager.getCourses().find(c => c.id === id);
+
+        if (student) {
+            document.getElementById("student-first-name").value = student.firstName;
+            document.getElementById("student-last-name").value = student.lastName;
+            document.getElementById("student-email").value = student.email;
+            document.querySelector(".form--student .form__button").textContent = "Edit";
+        } else if (instructor) {
+            document.getElementById("instructor-first-name").value = instructor.firstName;
+            document.getElementById("instructor-last-name").value = instructor.lastName;
+            document.getElementById("instructor-email").value = instructor.email;
+            document.querySelector(".form--instructor .form__button").textContent = "Edit";
+        } else if (course) {
+            document.getElementById("course-name").value = course.name;
+            document.getElementById("course-code").value = course.code;
+            document.querySelector(".form--course .form__button").textContent = "Edit";
+        }
+
+        this.editState.isEditing = true;
+        this.editState.currentId = id;
+    }
+
+    static clearEditState() {
+        this.editState.isEditing = false;
+        this.editState.currentId = null;
+    }
+
     /*** STUDENT UI ***/
     static displayStudents() {
         const students = StudentManager.getStudents();
@@ -42,8 +76,23 @@ export class UI {
         });
         
     }
+
     
     
+
+
+
+    // DELETE BUTTON
+    static removeStudentFromTable(studentId) {
+        const row = document.querySelector(`.delete-student[data-id="${studentId}"]`)?.closest("tr");
+    
+        if (!row) {
+            console.log(`Student with ID ${studentId} not found in table.`);
+            return;
+        }
+    
+        row.remove();  
+    }
 
     // EDIT BUTTON 
 
@@ -70,7 +119,7 @@ export class UI {
             <td>${instructor.id}</td>
             <td>
                 <button class="delete-instructor" data-id="${instructor.id}">Delete</button>
-                <button class="edit-student" data-id="${instructor.id}">Edit</button>
+                <button class="edit-instructor" data-id="${instructor.id}">Edit</button>
             </td>
         `;
 

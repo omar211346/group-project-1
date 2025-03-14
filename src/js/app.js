@@ -29,9 +29,16 @@ document.querySelector(".form--student").addEventListener("submit", (event) => {
     const lastName = document.getElementById("student-last-name").value.trim();
     const email = document.getElementById("student-email").value.trim();
 
-    const newStudent = new Student(firstName, lastName, email);
-    StudentManager.addStudent(newStudent);
-    UI.addStudentToTable(newStudent);
+    if (UI.editState.isEditing) {
+        StudentManager.updateStudent(UI.editState.currentId, firstName, lastName, email);
+        UI.displayStudents();
+        document.querySelector(".form--student .form__button").textContent = "Add";
+        UI.clearEditState();
+    } else {
+        const newStudent = new Student(firstName, lastName, email);
+        StudentManager.addStudent(newStudent);
+        UI.addStudentToTable(newStudent);
+    }
 
     document.getElementById("student-first-name").value = "";
     document.getElementById("student-last-name").value = "";
@@ -46,15 +53,21 @@ document.querySelector(".form--instructor").addEventListener("submit", (event) =
     const lastName = document.getElementById("instructor-last-name").value.trim();
     const email = document.getElementById("instructor-email").value.trim();
 
-    const newInstructor = new Instructor(firstName, lastName, email);
-    InstructorManager.addInstructor(newInstructor);
-    UI.addInstructorToTable(newInstructor);
-    UI.updateDropdowns(); 
+    if (UI.editState.isEditing) {
+        InstructorManager.updateInstructor(UI.editState.currentId, firstName, lastName, email);
+        UI.displayInstructors();
+        document.querySelector(".form--instructor .form__button").textContent = "Add";
+        UI.clearEditState();
+    } else {
+        const newInstructor = new Instructor(firstName, lastName, email);
+        InstructorManager.addInstructor(newInstructor);
+        UI.addInstructorToTable(newInstructor);
+        UI.updateDropdowns();
+    }
 
     document.getElementById("instructor-first-name").value = "";
     document.getElementById("instructor-last-name").value = "";
     document.getElementById("instructor-email").value = "";
-    
 });
 
 /*** COURSE MANAGEMENT ***/
@@ -65,14 +78,21 @@ document.querySelector(".form--course").addEventListener("submit", (event) => {
     const courseCode = document.getElementById("course-code").value.trim();
 
     try {
-        const newCourse = new Course(courseName, courseCode);
-        CourseManager.addCourse(newCourse);
-        UI.addCourseToTable(newCourse);
-        UI.updateDropdowns(); 
+        if (UI.editState.isEditing) {
+            CourseManager.updateCourse(UI.editState.currentId, { name: courseName, code: courseCode });
+            UI.displayCourses();
+            document.querySelector(".form--course .form__button").textContent = "Add";
+            UI.clearEditState();
+        } else {
+            const newCourse = new Course(courseName, courseCode);
+            CourseManager.addCourse(newCourse);
+            UI.addCourseToTable(newCourse);
+            UI.updateDropdowns();
+        }
 
         document.getElementById("course-name").value = "";
         document.getElementById("course-code").value = "";
-    } catch (error) {                                           
+    } catch (error) {
         UI.showAlert(error.message, "error");
     }
 });
@@ -98,41 +118,45 @@ document.querySelector(".form--assign").addEventListener("submit", (event) => {
 
 // EVENTLISTENERS
 /*** DELETE & EDIT BUTTON STUDENT ***/
+document.querySelector(".table__body--student").addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-student")) {
+        const studentId = event.target.getAttribute("data-id");
+        if (StudentManager.deleteStudent(studentId)) {
+            UI.removeStudentFromTable(studentId);
+        }
+    } else if (event.target.classList.contains("edit-student")) {
+        const studentId = event.target.getAttribute("data-id");
+        UI.enterEditMode(studentId);
+    }
+});
 
 /*** DELETE & EDIT BUTTON INSTRUCTOR ***/
 document.querySelector(".table__body--instructor").addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-instructor")) {
         const instructorId = event.target.getAttribute("data-id");
-
-        if (InstructorManager.deleteInstructor(instructorId)) {  // remove from localStorage
-            UI.removeInstructorFromTable(instructorId);  
-            console.log(`${instructorId} was deleted.`);
-        } else {
-            console.console.log(`${instructorId} not found.`);
+        if (InstructorManager.deleteInstructor(instructorId)) {
+            UI.removeInstructorFromTable(instructorId);
         }
+    } else if (event.target.classList.contains("edit-instructor")) {
+        const instructorId = event.target.getAttribute("data-id");
+        UI.enterEditMode(instructorId);
     }
 });
-
-
-// * EDIT INSTRUCTOR
-
-
 
 /*** DELETE & EDIT BUTTON COURSE ***/
 document.querySelector(".table__body--course").addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-course")) {
         const courseId = event.target.getAttribute("data-id");
-
-        if (CourseManager.deleteCourse(courseId)) {  
-            UI.removeCourseFromTable(courseId);  
-            console.log(`${courseId} was deleted.`);
-        } else {
-            console.log(`${courseId} not found.`);
+        if (CourseManager.deleteCourse(courseId)) {
+            UI.removeCourseFromTable(courseId);
         }
+    } else if (event.target.classList.contains("edit-course")) {
+        const courseId = event.target.getAttribute("data-id");
+        UI.enterEditMode(courseId);
     }
 });
 
-// * EDIT COURSE
+// * EDIT INSTRUCTOR
 
 
 
